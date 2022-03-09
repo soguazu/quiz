@@ -1,0 +1,8 @@
+{
+  "name": "Quiz",
+  "version": "0.0.0",
+  "description": "Simple Quiz Web API",
+  "title": "Quiz Web API",
+  "url": "http://127.0.0.1:8080/v1",
+  "sampleUrl": "http://127.0.0.1:8080/v1"
+}

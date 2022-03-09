@@ -1,0 +1,15 @@
+version: '3.8'				
+services:					
+  api:
+    restart: always	
+    build: .
+    ports:
+      -	"8080:8080"
+    env_file:
+      - ./.env
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
