@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development nodemon",
-    "lintfix": "eslint src --fix --cache"
+    "lintfix": "eslint src --fix --cache",
+    "docs:api": "echo 'Building REST Docs...' && apidoc -c apidoc.json -i src/interfaces/http/routes/ -o docs/apidocs"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.14.0",
@@ -19,7 +20,12 @@
     "prettier": "^2.5.1"
   },
   "dependencies": {
+    "apidoc": "^0.50.4",
+    "awilix": "^6.1.0",
+    "awilix-express": "^6.0.0",
     "convict": "^6.2.1",
-    "dotenv-extended": "^2.9.0"
+    "dotenv-extended": "^2.9.0",
+    "express": "^4.17.3",
+    "winston": "^3.6.0"
   }
 }
