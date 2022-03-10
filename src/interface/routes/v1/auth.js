@@ -39,7 +39,7 @@ const api = makeInvoker(authController);
 router.route('/signup').post(api('register'));
 
 /**
- * @api {post} /auth/login Login
+ * @api {post} /auth/login Authenticate user
  * @apiGroup Auth
  * @apiName Login
  * @apiDescription Authenticate a user using email and password

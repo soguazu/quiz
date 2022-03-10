@@ -1,4 +1,3 @@
-const User = require('../../../domain/User');
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema(
@@ -48,8 +47,6 @@ const UserSchema = new mongoose.Schema(
     },
   }
 );
-
-UserSchema.loadClass(User);
 
 UserSchema.index({
   firstName: 'text',

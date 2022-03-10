@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-const Token = require('../../../domain/Token');
 /*
 Token schema
 */
@@ -21,8 +20,6 @@ const TokenSchema = new mongoose.Schema(
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
-
-TokenSchema.loadClass(Token);
 
 TokenSchema.index({ user: 1, purpose: 1 }, { unique: true });
 
