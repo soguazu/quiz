@@ -13,7 +13,10 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 
+COPY apidoc.json ./
+
 RUN yarn install
+
 
 FROM base
 
@@ -23,10 +26,14 @@ COPY --from=builder /usr/src/app/node_modules ./node_modules
 
 COPY . .
 
+RUN yarn docs:api
+
+COPY docs .
+
 EXPOSE 8080
 
 
 # start the application
-CMD [ "yarn", "run", "dev" ]
+CMD [ "yarn", "run", "dev:docker" ]
 
 # Trigger build

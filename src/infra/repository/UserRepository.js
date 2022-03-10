@@ -1,15 +1,14 @@
 const BaseRepository = require('./BaseRepository');
 const bcrypt = require('bcryptjs');
 
-const HttpError = require('../../interfaces/http/common/HttpError');
-
 class UserRepository extends BaseRepository {
-  constructor({ models: { User } }) {
+  constructor({ models: { User }, httpError }) {
     const selectOptions = {
       single: '-__v -referrals -newUser',
       multiple: '-__v -referrals -newUser',
     };
     super({ Model: User, selectOptions });
+    this.HttpError = httpError;
   }
   async persist(user) {
     if (user.clearPassword) {
@@ -25,7 +24,7 @@ class UserRepository extends BaseRepository {
     const user = await super.getBy(filter, `-__v ${omitPassword}`);
 
     if (!user) {
-      throw new HttpError(404, true, 'User not found', {});
+      throw new this.HttpError(404, true, 'User not found', {});
     }
 
     return user;

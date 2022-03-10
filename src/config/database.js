@@ -13,11 +13,18 @@ const db = {
     env: 'MONGO_NAME',
     sensitive: false,
   },
+  port: {
+    doc: 'The database port',
+    format: '*',
+    default: 27017,
+    env: 'MONGO_PORT',
+    sensitive: false,
+  },
   user: {
     doc: 'The database username',
     format: '*',
     default: '',
-    env: encodeURIComponent('MONGO_USER'),
+    env: encodeURIComponent('MONGO_USERNAME'),
     sensitive: true,
   },
   password: {

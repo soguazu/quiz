@@ -27,6 +27,34 @@ const server = {
     env: 'NODE_ENV',
     sensitive: false,
   },
+  bodyLimit: {
+    doc: 'The maximum size of request bodies (json)',
+    format: '*',
+    default: '10mb',
+    env: 'BODY_LIMIT',
+    sensitive: false,
+  },
+  allowedOrigins: {
+    doc: 'Allowed origins for CORS',
+    format: '*',
+    default: '*',
+    env: 'ALLOWED_ORIGINS',
+    sensitive: false,
+  },
+  encryptionKey: {
+    doc: 'Encryption Key',
+    format: '*',
+    default: '',
+    env: encodeURIComponent('ENCRYPTION_KEY'),
+    sensitive: true,
+  },
+  jwtToken: {
+    doc: 'JWT Token',
+    format: '*',
+    default: '',
+    env: encodeURIComponent('JWT_SECRET'),
+    sensitive: true,
+  },
 };
 
 module.exports = server;

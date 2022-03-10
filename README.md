@@ -52,41 +52,6 @@ A web api that allows users to create and take quiz
 
 \_Below is an instruction on how to install and set up your app.
 
-#### Normal
-
-1. Clone the repo
-
-   ```sh
-   git clone https://github.com/soguazu/quiz.git
-   ```
-
-2. Cd into the directory
-
-   ```sh
-   cd quiz
-   ```
-
-3. Install NPM packages and Yarn, in your root directory of the project run the command below
-
-   ```sh
-   yarn
-   ```
-
-4. Create an .env and copy the template from .env.sample
-
-   ```sh
-   touch .env
-   ```
-
-5. Copy the value inside .env.sample into the .env and fill the values for the necessary config
-
-
-7. Run the application
-
-   ```sh
-   yarn run dev
-   ```
-
 #### Docker
 
 1. Clone the repo
@@ -113,7 +78,7 @@ A web api that allows users to create and take quiz
   
 
    ```sh
-   docker compose up --build -d
+   make
    ```
 
 ## Usage

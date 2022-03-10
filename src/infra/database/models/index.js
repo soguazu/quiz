@@ -8,7 +8,8 @@ const path = require('path');
 // eslint-disable-next-line no-underscore-dangle
 const _require = require;
 
-const getModel = (file) => _require(path.join(__dirname, file)).default;
+const getModel = (file) => _require(path.join(__dirname, file));
+
 const models = {};
 
 fs.readdirSync(__dirname)
@@ -17,6 +18,7 @@ fs.readdirSync(__dirname)
   )
   .forEach((file) => {
     const model = getModel(file);
+
     models[model.modelName] = model;
   });
 

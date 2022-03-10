@@ -47,7 +47,7 @@ function buildLogger() {
     ),
     transports: [
       new transports.Console(),
-      new transports.File(options.error),
+      new transports.Console(options.error),
       new transports.File(options.file),
     ],
     exitOnError: false, // do not exit on handled exceptions

@@ -1,7 +1,11 @@
 const { Request, Response, Router } = require('express');
 const { makeInvoker } = require('awilix-express');
 
+const authController = require('../../controller/auth');
+
 const router = Router();
+
+const api = makeInvoker(authController);
 
 /**
  * @api {post} /auth/signup Creates account for user
@@ -32,6 +36,7 @@ const router = Router();
  *    "links": []
  * }
  */
+router.route('/signup').post(api('register'));
 
 /**
  * @api {post} /auth/login Login
@@ -51,5 +56,6 @@ const router = Router();
  *    "links": []
  * }
  */
+router.route('/login').post(api('login'));
 
 module.exports = router;

@@ -8,17 +8,11 @@ const { Connection, connect, connection, set } = require('mongoose');
 class MongoDBManager {
   constructor({ config, logger }) {
     this.logger = logger;
-    const user = encodeURIComponent(config.get('db.user'));
-    const password = encodeURIComponent(config.get('db.password'));
     const host = config.get('db.host');
     const name = config.get('db.name');
-    const auth = config.get('db.auth');
     const environment = config.get('app.env');
 
     let connectionString = `mongodb://${host}/${name}`;
-    if (auth) {
-      connectionString = `mongodb+srv://${user}:${password}@${host}/${name}?retryWrites=true&w=majority`;
-    }
 
     this.connectionString = connectionString;
     this.connection = connection;

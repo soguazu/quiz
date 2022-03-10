@@ -3,17 +3,23 @@ const {
   Lifetime,
   asClass,
   asValue,
+  asFunction,
   createContainer,
 } = require('awilix');
 const { scopePerRequest } = require('awilix-express');
-
-const HttpError = require('./interface/error/HttpError');
+const { logger, morganOption, createLog, LogTypes } = require('./infra/logger');
+const ResponseBuilder = require('./interface/util/ResponseBuilder');
+const encryption = require('./interface/util/encryption');
+const {
+  validateRequest,
+  validateRequestWithCustomSchema,
+} = require('./interface/util/validation');
 const MongoDB = require('./infra/database/MongoDBManager');
 const config = require('./config/index');
 const httpServer = require('./interface/server');
+const HttpError = require('./interface/error/HttpError');
 const mongodbModels = require('./infra/database/models/');
-
-import routes from '@interfaces/http/routes/router';
+const routes = require('./interface/routes/router');
 
 const container = createContainer({
   injectionMode: InjectionMode.PROXY,
@@ -28,16 +34,19 @@ container.register({
   routes: asFunction(routes),
   httpServer: asClass(httpServer),
   morganOption: asValue(morganOption),
-  HttpError: asValue(HttpError),
   ResponseBuilder: asValue(ResponseBuilder),
+  encryption: asClass(encryption),
+  httpError: asValue(HttpError),
   LogTypes: asValue(LogTypes),
   createLog: asValue(createLog),
+  validateRequest: asValue(validateRequest),
+  validateRequestWithCustomSchema: asValue(validateRequestWithCustomSchema),
 });
 
 container.loadModules(
   [
     [
-      './infra/repositories/**/*.js',
+      './infra/repository/**/*.js',
       {
         lifetime: Lifetime.SCOPED,
         register: asClass,

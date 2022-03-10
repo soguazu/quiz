@@ -7,8 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development nodemon",
+    "dev:docker": "NODE_ENV=development node ./src/index.js",
     "lintfix": "eslint src --fix --cache",
-    "docs:api": "echo 'Building REST Docs...' && apidoc -c apidoc.json -i src/interfaces/http/routes/ -o docs/apidocs"
+    "docs:api": "echo 'Building REST Docs...' && apidoc -c apidoc.json -i src/interface/routes/ -o docs/apidocs"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.14.0",
@@ -29,6 +30,8 @@
     "dotenv-extended": "^2.9.0",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.5",
     "morgan": "^1.10.0",
     "winston": "^3.6.0"

@@ -1,4 +1,4 @@
-const User = require('../../../../domain/User');
+const User = require('../../../domain/User');
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema(

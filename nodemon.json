@@ -2,7 +2,7 @@
     "watch": ["src"],
     "ext": "ts,js,json",
     "ignore": ["node_modules", "coverage", "dist", "docs"],
-    "exec": "node ./src/index.js",
+    "exec": "yarn run docs:api &&  node ./src/index.js",
     "restartable": "rs",
     "env": {
       "NODE_ENV": "development"
