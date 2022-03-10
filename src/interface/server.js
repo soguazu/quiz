@@ -11,7 +11,6 @@ const path = require('path');
 class HttpServer {
   constructor({ config }) {
     const app = express();
-    app.get('/', (req, res) => res.json('Just got hee'));
     app.disable('x-powered-by');
     // URL for API documentation
     app.use(
