@@ -7,10 +7,10 @@ services:
       - 8080:8080
     env_file:
       - ./.env
-    volumes:
-      - node_modules:/usr/src/app/node_modules
-      - logs:/usr/src/app/logs
-      - docs:/usr/src/app/docs
+    # volumes:
+      # - node_modules:/usr/src/app/node_modules
+      # - logs:/usr/src/app/logs
+      # - docs:/usr/src/app/docs
   mongodb:
     image: mongo
     restart: always
@@ -20,6 +20,6 @@ services:
       - mongodb:/data/db
 volumes:
  mongodb:
- node_modules:
- logs:
- docs:
+#  node_modules:
+#  logs:
+#  docs:

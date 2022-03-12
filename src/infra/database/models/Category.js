@@ -2,10 +2,16 @@ const mongoose = require('mongoose');
 
 const CategorySchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
       lowercase: true,
+      unique: true
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      refPath: 'User',
     },
   },
   {

@@ -6,6 +6,17 @@ class HttpError extends Error {
     this.data = data;
     this.isOperational = isOperational;
   }
+
+  getErrorResponse(res) {
+    let respObj = {
+      success: false,
+      error: this.message,
+    };
+    if (this.data) {
+      respObj['data'] = this.data;
+    }
+    return res.status(this.status).json(respObj);
+  }
 }
 
 module.exports = HttpError;

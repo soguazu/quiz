@@ -2,14 +2,12 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
-
-const errorHandler = require('../middleware/errorHandler');
 const v1Routes = require('./v1');
 
 /**
  * Configures express middlewares
  */
-module.exports = ({ config, containerMiddleware, morganOption }) => {
+module.exports = ({ config, containerMiddleware, morganOption, logger }) => {
   const router = express.Router();
   router.use(helmet());
   const NODE_ENV = config.get('app.env');
@@ -55,8 +53,15 @@ module.exports = ({ config, containerMiddleware, morganOption }) => {
   );
 
   router.use('/v1', v1Routes);
+  router.use((err, req, res, next) => {
+    logger.error(err, undefined, false, req);
 
-  router.use(errorHandler);
+    if (err.name === 'HttpError') {
+      return err.getErrorResponse(res);
+    }
+
+    res.status(500).json({ success: false, error: 'An error occurred' });
+  });
 
   return router;
 };

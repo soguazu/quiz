@@ -23,7 +23,7 @@ class ResponseBuilder {
         return ResponseBuilder.respondWithError(
           res,
           errorName,
-          +errorCode,
+          errorCode,
           errorMessage,
           data
         );
@@ -50,7 +50,7 @@ class ResponseBuilder {
   static respondWithError(
     res,
     errorName,
-    errorCode = ResponseBuilder.HTTP_STATUS.INTERNAL_SERVER_ERROR,
+    errorCode = 500,
     message = 'Unknown error',
     data = {}
   ) {

@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 
+const HttpError = require('../../interface/error/HttpError');
+
 class BaseRepository {
   /**
    * @constructor
    * @param {*} param0
    */
-  constructor({ Model, selectOptions = {}, populateOptions = {}, httpError }) {
-    this.HttpError = httpError;
+  constructor({ Model, selectOptions = {}, populateOptions = {} }) {
     this.Collection = Model;
     this.modelName = this.Collection.modelName;
     this.singleSelectOptions = selectOptions.single
@@ -63,7 +64,7 @@ class BaseRepository {
       );
 
       if (!entity) {
-        throw new this.HttpError(404, true, `${this.modelName} not found`, {});
+        throw new HttpError(404, true, `${this.modelName} not found`, {});
       }
 
       return shouldPopulate
@@ -71,7 +72,7 @@ class BaseRepository {
         : entity;
     } catch (error) {
       if (error.name === 'CastError' && error.kind === 'ObjectId') {
-        throw new this.HttpError(404, true, `${this.modelName} not found`, {});
+        throw new HttpError(404, true, `${this.modelName} not found`, {});
       }
       throw error;
     }
@@ -121,7 +122,7 @@ class BaseRepository {
         .exec();
 
       if (!entity) {
-        throw new this.HttpError(404, true, `${this.modelName} not found`, {});
+        throw new HttpError(404, true, `${this.modelName} not found`, {});
       }
 
       return shouldPopulate
@@ -129,7 +130,7 @@ class BaseRepository {
         : entity;
     } catch (error) {
       if (error.name === 'CastError' && error.kind === 'ObjectId') {
-        throw new this.HttpError(404, true, `${this.modelName} not found`, {});
+        throw new HttpError(404, true, `${this.modelName} not found`, {});
       }
       throw error;
     }
@@ -198,7 +199,7 @@ class BaseRepository {
       }
     } catch (error) {
       if (error.name && error.name === 'ValidationError') {
-        throw new this.HttpError(
+        throw new HttpError(
           400,
           true,
           error.errors[Object.keys(error.errors)[0]].message,
@@ -220,7 +221,7 @@ class BaseRepository {
       return await this.Collection.insertMany(entities);
     } catch (error) {
       if (error.name && error.name === 'ValidationError') {
-        throw new this.HttpError(
+        throw new HttpError(
           400,
           true,
           error.errors[Object.keys(error.errors)[0]].message,
@@ -254,12 +255,12 @@ class BaseRepository {
         .populate(this.singlePopulateOptions);
 
       if (!entity) {
-        throw new this.HttpError(404, true, `${this.modelName} not found`, {});
+        throw new HttpError(404, true, `${this.modelName} not found`, {});
       }
       return entity;
     } catch (error) {
       if (error.name === 'CastError' && error.kind === 'ObjectId') {
-        throw new this.HttpError(404, true, `${this.modelName} not found`, {});
+        throw new HttpError(404, true, `${this.modelName} not found`, {});
       }
       throw error;
     }

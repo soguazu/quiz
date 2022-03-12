@@ -38,6 +38,12 @@ class Auth {
         { email: userData.email },
         true
       );
+      if (user.length === 0) {
+        throw new this.HttpError(
+          401,
+          'You have entered a wrong email or password.'
+        );
+      }
 
       if (!bcrypt.compareSync(userData.password, user[0].password)) {
         throw new this.HttpError(
