@@ -14,7 +14,7 @@ const api = makeInvoker(categoryController);
  * @apiName Create Category
  * @apiDescription This endpoint creates a new category
  * @apiVersion 0.0.0
- * @apiHeader {String} authorization Users unique token.
+ * @apiHeader {String} authorization Users unique Bearer token.
  * @apiBody {String} name Category name
  * @apiSampleRequest /category
  * @apiSuccessExample Success Response:
@@ -40,7 +40,7 @@ router.use(validateToken).route('/').post(api('create'));
  * @apiName Get Category By ID
  * @apiDescription This endpoint gets all category for a specific user
  * @apiVersion 0.0.0
- * @apiHeader {String} authorization Users unique token.
+ * @apiHeader {String} authorization Users unique Bearer token.
  * @apiSampleRequest /category
  * @apiSuccessExample Success Response:
  * {
@@ -64,7 +64,7 @@ router.use(validateToken).route('/').get(api('getAll'));
  * @apiName Get Category
  * @apiDescription This endpoint gets by id category for a specific user
  * @apiVersion 0.0.0
- * @apiHeader {String} authorization Users unique token.
+ * @apiHeader {String} authorization Users unique Bearer token.
  * @apiParam {String} id Category unique ID.
  * @apiSampleRequest /category/:id
  * @apiSuccessExample Success Response:

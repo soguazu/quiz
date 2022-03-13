@@ -1,10 +1,9 @@
-const mongoose = require('mongoose');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
-class Category {
-  constructor({ category, ResponseBuilder, validateRequest }) {
-    this.categoryService = category;
+class Question {
+  constructor({ option, ResponseBuilder, validateRequest }) {
+    this.optionService = option;
     this.ResponseBuilder = ResponseBuilder;
     this.validateRequest = validateRequest;
   }
@@ -12,29 +11,21 @@ class Category {
   async create(req, res, next) {
     try {
       const inputData = this.validateRequest(req, {
-        name: Joi.string().min(4).required(),
+        options: Joi.array().items(
+          Joi.object().keys({
+            answer: Joi.string(),
+            correct: Joi.boolean(),
+          })
+        ),
+        question: Joi.objectId().required(),
       });
 
-      inputData.user = req.userId;
-      const data = await this.categoryService.create(inputData);
+      const data = await this.optionService.create(inputData);
 
       await this.ResponseBuilder.getResponseHandler(res).onSuccess(
         data,
         'Created successfully.',
         201
-      );
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async getAll(req, res, next) {
-    try {
-      const data = await this.categoryService.getAll(req.userId);
-      await this.ResponseBuilder.getResponseHandler(res).onSuccess(
-        data,
-        '',
-        200
       );
     } catch (error) {
       next(error);
@@ -47,11 +38,7 @@ class Category {
         id: Joi.objectId().required(),
       });
 
-      const filter = {
-        _id: mongoose.Types.ObjectId(inputData.id),
-      };
-
-      const data = await this.categoryService.getById(filter);
+      const data = await this.optionService.getById(inputData);
 
       await this.ResponseBuilder.getResponseHandler(res).onSuccess(
         data[0],
@@ -64,4 +51,4 @@ class Category {
   }
 }
 
-module.exports = Category;
+module.exports = Question;

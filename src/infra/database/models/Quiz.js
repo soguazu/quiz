@@ -9,19 +9,13 @@ const QuizSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
+      required: false,
       lowercase: true,
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      refPath: 'Category',
-    },
-    slug: {
-        type: String,
-        required: true,
-        lowercase: true,
-        unique: true,
+      ref: 'Category',
     },
     published: {
       type: String,
@@ -36,7 +30,6 @@ const QuizSchema = new mongoose.Schema(
     },
   }
 );
-
 
 QuizSchema.index({
   slug: 'text',

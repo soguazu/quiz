@@ -50,7 +50,7 @@ router.route('/signup').post(api('register'));
  * {
  *     "success": true,
  *     "status_code": 200,
- *     "message": "Sign up successful!",
+ *     "message": "Logged in successful!",
  *     "data": {
  *     },
  *    "links": []

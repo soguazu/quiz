@@ -7,16 +7,16 @@ const QuestionSchema = new mongoose.Schema(
       required: true,
       lowercase: true,
     },
-     quiz: {
-       type: mongoose.Schema.Types.ObjectId,
-       required: true,
-       refPath: 'Quiz',
-     },
-     level: {
-        type: String,
-        default: 'easy',
-        enum: ['hard', 'medium', 'easy'],
-    }, 
+    quiz: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Quiz',
+    },
+    level: {
+      type: String,
+      default: 'easy',
+      enum: ['hard', 'medium', 'easy'],
+    },
   },
   {
     timestamps: {
@@ -25,6 +25,5 @@ const QuestionSchema = new mongoose.Schema(
     },
   }
 );
-
 
 module.exports = mongoose.model('Question', QuestionSchema);

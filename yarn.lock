@@ -2146,6 +2146,11 @@ jest-worker@^27.4.5:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+joi-objectid@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/joi-objectid/-/joi-objectid-4.0.2.tgz#a4065aa91431bbc6959a57f7b4d1dd10bd95a4b7"
+  integrity sha512-OjYM+wK/JGo2bSb9ADEyzxxROJPZYtrqIwBbywpJ2a98oKlbLtWTKvpzmrnXzou69Ey9EsjHsFvZYzpjeCdKuA==
+
 joi@^17.6.0:
   version "17.6.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-17.6.0.tgz#0bb54f2f006c09a96e75ce687957bd04290054b2"

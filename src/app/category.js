@@ -1,19 +1,19 @@
 class Category {
-  constructor({ categoryRepository,  httpError }) {
+  constructor({ categoryRepository, httpError }) {
     this.categoryRepository = categoryRepository;
     this.HttpError = httpError;
   }
 
   async create(inputData) {
-    return await this.categoryRepository.persist(inputData)
+    return await this.categoryRepository.persist(inputData);
   }
 
   async getAll(user) {
-    return await this.categoryRepository.getBy({user})
+    return await this.categoryRepository.getBy({ user });
   }
 
   async getById(inputData) {
-    return await this.categoryRepository.getBy({_id: inputData.id})
+    return await this.categoryRepository.getById(inputData);
   }
 }
 

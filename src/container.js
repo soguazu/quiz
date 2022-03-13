@@ -13,6 +13,7 @@ const encryption = require('./interface/util/encryption');
 const {
   validateRequest,
   validateRequestWithCustomSchema,
+  getPaginationValidationProps,
 } = require('./interface/util/validation');
 const MongoDB = require('./infra/database/MongoDBManager');
 const config = require('./config/index');
@@ -41,6 +42,7 @@ container.register({
   createLog: asValue(createLog),
   validateRequest: asValue(validateRequest),
   validateRequestWithCustomSchema: asValue(validateRequestWithCustomSchema),
+  getPaginationValidationProps: asValue(getPaginationValidationProps),
 });
 
 container.loadModules(

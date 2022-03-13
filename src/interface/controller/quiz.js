@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
-class Category {
-  constructor({ category, ResponseBuilder, validateRequest }) {
-    this.categoryService = category;
+class Quiz {
+  constructor({ quiz, ResponseBuilder, validateRequest }) {
+    this.quizService = quiz;
     this.ResponseBuilder = ResponseBuilder;
     this.validateRequest = validateRequest;
   }
@@ -12,11 +12,13 @@ class Category {
   async create(req, res, next) {
     try {
       const inputData = this.validateRequest(req, {
-        name: Joi.string().min(4).required(),
+        title: Joi.string().min(5).required(),
+        description: Joi.string().min(5).optional(),
+        category: Joi.string().required(),
       });
 
       inputData.user = req.userId;
-      const data = await this.categoryService.create(inputData);
+      const data = await this.quizService.create(inputData);
 
       await this.ResponseBuilder.getResponseHandler(res).onSuccess(
         data,
@@ -30,7 +32,7 @@ class Category {
 
   async getAll(req, res, next) {
     try {
-      const data = await this.categoryService.getAll(req.userId);
+      const data = await this.quizService.getAll(req.userId);
       await this.ResponseBuilder.getResponseHandler(res).onSuccess(
         data,
         '',
@@ -46,13 +48,11 @@ class Category {
       const inputData = this.validateRequest(req, {
         id: Joi.objectId().required(),
       });
-
       const filter = {
         _id: mongoose.Types.ObjectId(inputData.id),
       };
 
-      const data = await this.categoryService.getById(filter);
-
+      const data = await this.quizService.getById(filter);
       await this.ResponseBuilder.getResponseHandler(res).onSuccess(
         data[0],
         '',
@@ -64,4 +64,4 @@ class Category {
   }
 }
 
-module.exports = Category;
+module.exports = Quiz;

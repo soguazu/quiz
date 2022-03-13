@@ -2,7 +2,11 @@ const BaseRepository = require('./BaseRepository');
 
 class OptionRepository extends BaseRepository {
   constructor({ models: { Option } }) {
-    super({ Model: Option });
+    const selectOptions = {
+      single: '-__v',
+    };
+
+    super({ Model: Option, selectOptions });
   }
 }
 

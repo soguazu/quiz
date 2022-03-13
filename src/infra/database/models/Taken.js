@@ -6,24 +6,16 @@ const TakenSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-     user: {
-       type: mongoose.Schema.Types.ObjectId,
-       required: true,
-       refPath: 'User',
-     },
-     quiz: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        refPath: 'Quiz',
-      },
-      startedAt: {
-        type: Date,
-        required: true,
-      },
-      endedAt: {
-        type: Date,
-        required: true,
-      },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+    quiz: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Quiz',
+    },
   },
   {
     timestamps: {
@@ -32,6 +24,5 @@ const TakenSchema = new mongoose.Schema(
     },
   }
 );
-
 
 module.exports = mongoose.model('Taken', TakenSchema);

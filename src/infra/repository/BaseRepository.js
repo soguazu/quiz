@@ -91,7 +91,6 @@ class BaseRepository {
 
   async getBy(
     filter,
-    customSelectionOption = '',
     skip = 0,
     limit = 20,
     sortField = '_id',
@@ -102,8 +101,8 @@ class BaseRepository {
       sortQuery[sortField] = sortOrder === 'desc' ? -1 : 1;
 
       return await this.Collection.find(filter)
-        .select(customSelectionOption || this.multiSelectOptions)
-        .populate(this.multiPopulateOptions)
+        .select(this.multiSelectOptions)
+        .populate(this.singlePopulateOptions)
         .sort(sortQuery)
         .skip(+skip)
         .limit(+limit);

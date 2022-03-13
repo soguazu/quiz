@@ -27,8 +27,28 @@ function validateSchema(req, schema) {
   return value;
 }
 
+function getPaginationValidationProps(
+  shouldIncludeSort = false,
+  sortFields = ['createdAt']
+) {
+  const props = {
+    skip: Joi.number().optional().min(0),
+    limit: Joi.number().optional().min(0),
+  };
+
+  if (shouldIncludeSort) {
+    props.sortBy = Joi.string()
+      .optional()
+      .valid(...sortFields);
+    props.sortType = Joi.string().optional().valid('asc', 'desc');
+  }
+
+  return props;
+}
+
 module.exports = {
   validateRequest,
   validateSchema,
   validateRequestWithCustomSchema,
+  getPaginationValidationProps,
 };

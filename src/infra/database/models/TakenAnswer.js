@@ -2,29 +2,21 @@ const mongoose = require('mongoose');
 
 const TakenAnswerSchema = new mongoose.Schema(
   {
-     taken: {
-       type: mongoose.Schema.Types.ObjectId,
-       required: true,
-       refPath: 'Taken',
-     },
-     question: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        refPath: 'Question',
-      },
-      answer: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        refPath: 'Option',
-      },
-      startedAt: {
-        type: Date,
-        required: true,
-      },
-      endedAt: {
-        type: Date,
-        required: true,
-      },
+    taken: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Taken',
+    },
+    question: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Question',
+    },
+    answer: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Option',
+    },
   },
   {
     timestamps: {
@@ -33,6 +25,5 @@ const TakenAnswerSchema = new mongoose.Schema(
     },
   }
 );
-
 
 module.exports = mongoose.model('TakenAnswer', TakenAnswerSchema);

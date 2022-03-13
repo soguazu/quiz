@@ -10,9 +10,11 @@ class MongoDBManager {
     this.logger = logger;
     const host = config.get('db.host');
     const name = config.get('db.name');
+    const port = config.get('db.port');
     const environment = config.get('app.env');
 
     let connectionString = `mongodb://${host}/${name}`;
+    // let connectionString = `mongodb://${host}:${port}/${name}`;
 
     this.connectionString = connectionString;
     this.connection = connection;
